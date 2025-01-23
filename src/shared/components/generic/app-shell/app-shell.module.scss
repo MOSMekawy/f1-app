@@ -1,0 +1,24 @@
+.app_layout {
+   display: flex; 
+   width: 100%;
+   align-items: center;
+   flex-direction: column;
+
+   .heading {
+     img {
+      display: inline;
+     } 
+
+     margin: 4rem;
+     color: var(--light-1);
+     font-size: 5rem;
+     font-family: "Racing Sans One", serif;
+     font-weight: 400;
+     font-style: normal;
+   }
+
+   .content_card {
+     width: calc(100% - 5rem);
+     min-height: 10rem;
+   }
+}
