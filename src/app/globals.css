@@ -1,12 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap');
+@import url('@mantine/core/styles.css');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
   --dark-1: #242424;
+  --light-1: #FFFFFF;
 }
 
-body {
+html, body {
+  width: 100%;
+  height: 100%;
   background: var(--dark-1);
   font-family: Arial, Helvetica, sans-serif;
 }

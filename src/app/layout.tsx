@@ -6,6 +6,8 @@ import {
   mantineHtmlProps,
 } from "@mantine/core";
 import appTheme from "./app-theme";
+import { AppLayout } from "@/shared/components/generic/app-shell/app-shell.component";
+import QueryProvider from "@/shared/components/generic/query-provider/query-provider.component";
 
 export const metadata: Metadata = {
   title: "F1 App",
@@ -28,7 +30,13 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <MantineProvider theme={appTheme}>{children}</MantineProvider>
+        <QueryProvider>
+          <MantineProvider theme={appTheme}>
+            <AppLayout>
+                {children}
+            </AppLayout>
+          </MantineProvider>
+        </QueryProvider>
       </body>
     </html>
   );
