@@ -135,7 +135,7 @@ Routing follows NextJS conventions.
 
 ----------
 
-### **Best Practices**
+### **Conventions**
 
 -   **Reusability:**
     
