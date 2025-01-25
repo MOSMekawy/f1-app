@@ -1,5 +1,5 @@
-import { Season } from "@/shared/services/formula-seasons/models/get-seasons-response.type";
-import { Button, Card, Grid } from "@mantine/core";
+import { Season } from "@/app/seasons/_services/models/get-seasons-response.type";
+import { Card, Grid } from "@mantine/core";
 import styles from "./seasons-card-view.module.scss";
 import Link from "next/link";
 
@@ -15,9 +15,6 @@ export function SeasonsCardView({ seasons }: { seasons?: Array<Season> }) {
                                     <span>year</span>
                                     <span>{s.season}</span>
                                 </Card.Section>
-                            </Link>
-                            <Link href={s.url}>
-                                <Button variant="outline" fullWidth>Visit Wikipedia Page</Button>
                             </Link>
                         </Card>
   

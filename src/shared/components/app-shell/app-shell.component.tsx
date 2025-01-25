@@ -1,5 +1,5 @@
 import Image from "next/image";
-import styles from "./app-layout.module.scss";
+import styles from "./app-shell.module.scss";
 import { Card } from "@mantine/core";
 
 export function AppLayout({ children }: {

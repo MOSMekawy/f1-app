@@ -1,4 +1,4 @@
-export const parseInteger = (param: string | null) => {
+export const parseIntegerOrDefault = (param: string | null, defaultVal: number) => {
     if (param && !isNaN(+param)) return parseInt(param);
-    return 0;
+    return defaultVal;
 };

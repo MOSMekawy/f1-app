@@ -4,15 +4,18 @@ import {
   MantineProvider,
   ColorSchemeScript,
   mantineHtmlProps,
+  createTheme,
 } from "@mantine/core";
-import appTheme from "./app-theme";
-import { AppLayout } from "@/shared/components/generic/app-shell/app-shell.component";
-import QueryProvider from "@/shared/components/generic/query-provider/query-provider.component";
+import { AppLayout } from "../shared/components/app-shell/app-shell.component";
+import QueryProvider from "../shared/components/query-provider/query-provider.component";
 
 export const metadata: Metadata = {
   title: "F1 App",
   description: "Formula 1 Historical Data",
 };
+
+const theme = createTheme({});
+
 
 export default function RootLayout({
   children,
@@ -31,7 +34,7 @@ export default function RootLayout({
       </head>
       <body>
         <QueryProvider>
-          <MantineProvider theme={appTheme}>
+          <MantineProvider theme={theme} forceColorScheme="dark">
             <AppLayout>
                 {children}
             </AppLayout>

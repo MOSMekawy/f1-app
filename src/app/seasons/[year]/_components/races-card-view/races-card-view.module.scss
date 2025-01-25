@@ -1,0 +1,15 @@
+.races_card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    height: 100%;
+
+    .race_name {
+        font-size: 3rem;
+        font-family: "Racing Sans One", serif;
+        font-weight: 400;
+        font-style: normal;
+        vertical-align: middle;
+    }
+}

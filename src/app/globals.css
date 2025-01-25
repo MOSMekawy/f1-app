@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap');
 @import url('@mantine/core/styles.css');
+@import url('@mantine/charts/styles.css');
 
 @tailwind base;
 @tailwind components;
