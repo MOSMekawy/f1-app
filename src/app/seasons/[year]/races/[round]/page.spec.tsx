@@ -3,7 +3,6 @@ import { useParams } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import RaceView from './page';
 import { MantineProvider } from '@mantine/core';
-import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom'
 
 // Mock dependencies
