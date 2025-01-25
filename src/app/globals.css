@@ -9,6 +9,8 @@
 :root {
   --dark-1: #242424;
   --light-1: #FFFFFF;
+
+  --light-blue: #778899;
 }
 
 html, body {

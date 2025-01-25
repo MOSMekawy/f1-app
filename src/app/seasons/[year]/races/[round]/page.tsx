@@ -11,12 +11,15 @@ import {
   Group,
   Loader,
   Text,
+  TextInput,
 } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
 import styles from "./page.module.scss";
 import { useMemo } from "react";
 import { BarChart } from "@mantine/charts";
+import { IconSearch } from "@tabler/icons-react";
+import { useDebouncedState } from "@mantine/hooks";
 
 export default function RaceView() {
   const params = useParams<{ year: string; round: string }>();
@@ -26,6 +29,24 @@ export default function RaceView() {
     queryFn: () =>
       getSeasonRaceDetails({ seasonId: params.year, round: params.round }),
   });
+
+  const [searchTerm, setSearchTerm] = useDebouncedState("", 500);
+
+  const highlightedDriversSet = useMemo(() => {
+    const set = new Set();
+
+    const matchingRegex = new RegExp(searchTerm, "i");
+
+    if (searchTerm.length)
+      data?.MRData?.RaceTable?.Races?.at(0)?.Results?.forEach((r) => {
+        const isMatch = matchingRegex.test(
+          `${r.Driver.givenName} ${r.Driver.familyName}`
+        );
+        if (isMatch) set.add(`${r.number}-${r.Driver.driverId}`);
+      });
+
+    return set;
+  }, [data, searchTerm]);
 
   const graphData = useMemo(
     () =>
@@ -40,7 +61,10 @@ export default function RaceView() {
 
   if (isLoading)
     return (
-      <div className={styles.preload_race_details_container} data-testid="loader-container">
+      <div
+        className={styles.preload_race_details_container}
+        data-testid="loader-container"
+      >
         <Loader color="white" size="lg" />
       </div>
     );
@@ -63,6 +87,16 @@ export default function RaceView() {
             {params.round}
           </Anchor>
         </Breadcrumbs>
+
+        <TextInput
+          placeholder="Search by driver's name"
+          size="xs"
+          leftSection={<IconSearch size={12} stroke={1.5} />}
+          rightSectionWidth={70}
+          styles={{ section: { pointerEvents: "none" } }}
+          onChange={(ev) => setSearchTerm(ev.target.value)}
+          mb="sm"
+        />
       </Group>
 
       <Grid>
@@ -81,7 +115,17 @@ export default function RaceView() {
             >
               <div>
                 <span>#{r.position}</span>
-                <span>{`${r.Driver.familyName} ${r.Driver.givenName}`}</span>
+                <span
+                  className={
+                    highlightedDriversSet.has(
+                      `${r.number}-${r.Driver.driverId}`
+                    )
+                      ? styles.highlighted_driver_name
+                      : ""
+                  }
+                >
+                  {`${r.Driver.givenName} ${r.Driver.familyName}`}
+                </span>
               </div>
               <div>
                 <Divider mt="sm" mb="md" />
@@ -101,15 +145,11 @@ export default function RaceView() {
 
       <Divider mt="md" mb="md" />
 
-      <div className={styles.driver_performance_section_title}>Drivers Performances</div>
+      <div className={styles.driver_performance_section_title}>
+        Drivers Performances
+      </div>
 
-      <Card
-        shadow="sm"
-        padding="lg"
-        mb="lg"
-        radius="md"
-        withBorder
-      >
+      <Card shadow="sm" padding="lg" mb="lg" radius="md" withBorder>
         <BarChart
           h={800}
           data={graphData}
@@ -120,8 +160,7 @@ export default function RaceView() {
             { name: "time", color: "green" },
             { name: "laps", color: "darkgray" },
           ]}
-        >
-        </BarChart>
+        ></BarChart>
       </Card>
     </div>
   );

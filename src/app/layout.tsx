@@ -8,6 +8,7 @@ import {
 } from "@mantine/core";
 import { AppLayout } from "../shared/components/app-shell/app-shell.component";
 import QueryProvider from "../shared/components/query-provider/query-provider.component";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "F1 App",
@@ -36,7 +37,9 @@ export default function RootLayout({
         <QueryProvider>
           <MantineProvider theme={theme} forceColorScheme="dark">
             <AppLayout>
+              <Suspense>
                 {children}
+              </Suspense>
             </AppLayout>
           </MantineProvider>
         </QueryProvider>
